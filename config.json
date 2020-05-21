@@ -1,3 +1,4 @@
 {
-    "file": "./queries.txt"
+    "queriesFile": "./queries.txt",
+    "songMode": "false"
 }
