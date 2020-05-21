@@ -14,10 +14,10 @@ echo.
 echo Press any key to continue . . .
 pause>nul
 echo.
-echo     Close this window at any time to stop the download process
+echo     Close this window at any time to stop the process
 echo.
 echo.
-echo     Press any key to begin downloading . . .
+echo     Press any key to begin . . .
 pause>nul
 
 :loop
