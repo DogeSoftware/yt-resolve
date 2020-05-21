@@ -3,6 +3,7 @@
 
 ### Quick Start (aka Usage)
 Add the search queries in `queries.txt` and run `start.bat`. Results are in `results.txt`.
+
 If you're downloading something else, open `progress.txt` and set the number to 0!
 
 ### Features
