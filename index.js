@@ -27,7 +27,7 @@ function getLine(filename, lineNum, callback) {
 }
 
 // Call Functions
-getLine(config.file, progress, (err, line) => {
+getLine(config.queriesFile, progress, (err, line) => {
 	console.log(chalk.yellow(`Searching: ${line}`));
 	if (line == undefined) return console.log(chalk.yellow(`Task finished, or no search queries in ${config.file}!`));
 	search(line, (err, res) => {
@@ -41,5 +41,6 @@ getLine(config.file, progress, (err, line) => {
 			resultfile.end();
 		} else return console.log(chalk.red('Could not find video! Ratelimit? Retrying..'));
 	});
+	// a simple fix to minimize ratelimits
 	sleep(250);
 });
