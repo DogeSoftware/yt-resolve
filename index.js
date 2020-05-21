@@ -6,9 +6,10 @@ const chalk = require('chalk'),
 	search = require('yt-search');
 
 // Load Configuration
-const	config = require('./config.json'),
+const outputFile = './result.txt',
 	progress = parseInt(fs.readFileSync('./progress.txt', 'utf8')),
-	resultfile = fs.createWriteStream(config.outputFile, { flags: 'a' });
+	queriesFile = './queries.txt',
+	resultfile = fs.createWriteStream(outputFile, { flags: 'a' });
 	
 // Define Functions
 function sleep(ms) {
@@ -27,9 +28,9 @@ function getLine(filename, lineNum, callback) {
 }
 
 // Call Functions
-getLine(config.queriesFile, progress, (err, line) => {
+getLine(queriesFile, progress, (err, line) => {
 	console.log(chalk.yellow(`Searching: ${line}`));
-	if (line == undefined) return console.log(chalk.yellow(`Task finished, or no search queries in ${config.file}!`));
+	if (line == undefined) return console.log(chalk.yellow(`Task finished, or no search queries in ${queriesFile}!`));
 	search(line, (err, res) => {
 		if (res) {
 			const videos = res.videos;
