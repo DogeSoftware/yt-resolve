@@ -1,0 +1,15 @@
+{
+  "name": "yt-resolve",
+  "version": "1.0.0",
+  "description": "Changes search queries into youtube links.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "Unlicense",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "yt-search": "^1.1.2"
+  }
+}
