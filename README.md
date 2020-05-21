@@ -18,4 +18,4 @@ Let's assume you want to download some music. You found a playlist converter tha
 **Important:** That was just a example. __This project does not encourage piracy, and the authors are not responsible if you get in trouble.__
 
 ### I'm confused about X.
-Please see (the wiki.)[https://github.com/DogeSoftware/yt-resolve/wiki]
+Please see [the wiki](https://github.com/DogeSoftware/yt-resolve/wiki).
