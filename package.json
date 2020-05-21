@@ -4,6 +4,7 @@
   "description": "Changes search queries into youtube links.",
   "main": "index.js",
   "scripts": {
+    "cleanup": "node cleanup.js",
     "start": "node index.js"
   },
   "author": "",
