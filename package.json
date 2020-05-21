@@ -9,6 +9,7 @@
   "author": "",
   "license": "Unlicense",
   "dependencies": {
+    "chalk": "^4.0.0",
     "fs": "0.0.1-security",
     "yt-search": "^1.1.2"
   }

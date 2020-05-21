@@ -8,6 +8,7 @@ where node.exe >nul 2>&1 && goto NodeInstalled || goto NodeNotInstalled
 echo Updating Libraries . . .
 echo.
 call npm i
+title yt-resolve
 echo Libraries are up to date!
 echo.
 echo Press any key to continue . . .
