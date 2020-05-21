@@ -21,7 +21,7 @@ function getLine(filename, lineNum, callback) {
 		// Data is a buffer that we need to convert to a string
 		// Improvement: loop over the buffer and stop when the line is reached
 		const lines = data.toString('utf-8').split('\n');
-		if(+lineNum > lines.length) return callback('File end reached without finding line', null);
+		if (+lineNum > lines.length) return callback('File end reached without finding line', null);
 		callback(null, lines[+lineNum]);
 	});
 }
