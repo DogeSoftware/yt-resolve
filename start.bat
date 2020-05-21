@@ -21,6 +21,7 @@ echo     Press any key to begin . . .
 pause>nul
 
 :loop
+if exists finished goto finished
 call node ./index.js
 goto loop
 
@@ -32,6 +33,11 @@ goto end
 echo NodeJS Runtime is not installed on your system. Please install NodeJS and try again.
 goto end
 
+:finished
+del finished
+goto end
+
 :end
-pause
+echo Press any key to close this program . . .
+pause>nul
 exit

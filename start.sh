@@ -4,11 +4,9 @@
 PROMPT_COMMAND='echo -ne "\033]0;yt-resolve\007"'
 
 # Check if NPM is installed
-if [ $(which npm) ]
-then
+if [ $(which npm) ] ; then
 	# Check if Node is installed
-	if [ $(which node) ]
-	then
+	if [ $(which node) ] ; then
 		# Make sure libraries are up-to-date
 		echo "Updating Libraries . . ."
 		echo
@@ -21,11 +19,15 @@ then
 		echo "    Close this window at any time to stop the process"
 		echo
 		echo
-		read -n 1 -s -r -p "    Press any key to begin . . ."
+		read -rsn1 -p "    Press any key to begin . . ."
 		echo
 		# Begin infinite loop
-		while [ true ]
-		do
+		while [ true ] ; do
+			if [[ -e ./finished ]] ; then
+				rm ./finished
+				read -rsn1 -p "Press any key to close this program . . ."
+				exit
+			fi
 			node ./index.js
 		done
 	else
