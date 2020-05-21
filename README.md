@@ -16,3 +16,6 @@ If you finished downloading everything __and you don't need both the queries and
 Let's assume you want to download some music. You found a playlist converter that can export all of the song names from your Spotify (or any streaming music service) playlist. Now, you want to download all of these songs off YouTube. You can use this tool to get the URL's of your songs and then add all of the URLs to a youtube downloader such as youtube-dl: `youtube-dl --batch-file='./result.txt'`
 
 **Important:** That was just a example. __This project does not encourage piracy, and the authors are not responsible if you get in trouble.__
+
+### I'm confused about X.
+Please see (the wiki.)[https://github.com/DogeSoftware/yt-resolve/wiki]
