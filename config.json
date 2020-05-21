@@ -1,3 +1,5 @@
 {
-    "file": "./queries.txt"
+    "outputFile": "./result.txt",
+    "queriesFile": "./queries.txt",
+    "songMode": "false"
 }
