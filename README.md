@@ -4,7 +4,7 @@
 ### Quick Start (aka Usage)
 Add the search queries in `queries.txt` and run `start.bat`. Results are in `results.txt`.
 
-If you finished downloading everything __and you don't need both the queries and results files__, open the terminal, `cd` into the directory where you have the project and type `npm cleanup` to clean everything up. After you run this command, you can use `yt-resolve` again.
+If you finished downloading everything __and you don't need both the queries and results files__, open the terminal, `cd` into the directory where you have the project and type `node cleanup.js` to clean everything up. After you run this command, you can use `yt-resolve` again.
 
 ### Features
 - High performance: tested with a query list of 4000 queries.
