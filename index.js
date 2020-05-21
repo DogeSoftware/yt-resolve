@@ -8,7 +8,7 @@ const chalk = require('chalk'),
 // Load Configuration
 const	config = require('./config.json'),
 	progress = parseInt(fs.readFileSync('./progress.txt', 'utf8')),
-	resultfile = fs.createWriteStream('./result.txt', { flags: 'a' });
+	resultfile = fs.createWriteStream(config.outputFile, { flags: 'a' });
 	
 // Define Functions
 function sleep(ms) {
