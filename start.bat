@@ -21,7 +21,7 @@ echo     Press any key to begin . . .
 pause>nul
 
 :loop
-if exists finished goto finished
+if exist finished goto finished
 call node ./index.js
 goto loop
 
