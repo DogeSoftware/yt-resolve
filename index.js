@@ -28,14 +28,14 @@ function getLine(filename, lineNum, callback) {
 }
 
 function finished() {
-	console.log(chalk.yellow(`Task finished, or no search queries in ${queriesFile}!`));
+	console.log(chalk.green(`\nTask finished, or no search queries in ${queriesFile}!`));
 	fs.writeFileSync('./finished', "", "utf8");
 }
 
 // Call Functions
 getLine(queriesFile, progress, (err, line) => {
-	console.log(chalk.yellow(`Searching: ${line}`));
 	if (!line) return finished();
+	console.log(chalk.yellow(`Searching: ${line}`));
 	search(line, (err, res) => {
 		if (res) {
 			const videos = res.videos;

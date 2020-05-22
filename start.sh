@@ -8,24 +8,24 @@ if [ $(which npm) ] ; then
 	# Check if Node is installed
 	if [ $(which node) ] ; then
 		# Make sure libraries are up-to-date
+		clear
 		echo "Updating Libraries . . ."
 		echo
 		npm i
 		echo "Libraries are up to date!"
 		echo
 		read -rsn1 -p "Press any key to continue . . ."
+		clear
+		echo "You can close this window at any time to stop the process"
 		echo
-		echo
-		echo "    Close this window at any time to stop the process"
-		echo
-		echo
-		read -rsn1 -p "    Press any key to begin . . ."
-		echo
+		read -rsn1 -p "Press any key to begin . . ."
+		clear
 		# Begin infinite loop
 		while [ true ] ; do
 			if [[ -e ./finished ]] ; then
 				rm ./finished
 				read -rsn1 -p "Press any key to close this program . . ."
+				echo
 				exit
 			fi
 			node ./index.js

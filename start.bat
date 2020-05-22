@@ -5,6 +5,7 @@ where npm.cmd >nul 2>&1 && goto NPMInstalled || goto NPMNotInstalled
 :NPMInstalled
 where node.exe >nul 2>&1 && goto NodeInstalled || goto NodeNotInstalled
 :NodeInstalled
+cls
 echo Updating Libraries . . .
 echo.
 call npm i
@@ -13,12 +14,13 @@ echo Libraries are up to date!
 echo.
 echo Press any key to continue . . .
 pause>nul
+cls
+echo You can close this window at any time to stop the process
 echo.
-echo     Close this window at any time to stop the process
-echo.
-echo.
-echo     Press any key to begin . . .
+echo Press any key to begin . . .
 pause>nul
+cls
+goto loop
 
 :loop
 if exist finished goto finished
@@ -40,4 +42,5 @@ goto end
 :end
 echo Press any key to close this program . . .
 pause>nul
+echo.
 exit
