@@ -31,6 +31,7 @@ goto loop
 :loop
 if exist finished goto finished
 call node ./index.js
+call powershell.exe Get-Content ./data/buffer.txt
 goto loop
 
 :NPMNotInstalled
