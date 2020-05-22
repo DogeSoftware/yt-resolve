@@ -14,12 +14,6 @@ Explain the **details** for making this change. What existing problem does the p
 
 Demonstrate the code is solid. Example: The exact commands you ran and their output, screenshots / videos if the pull request changes UI.
 
-<!-- Make sure tests pass on both Travis and Circle CI. -->
-
 **Code formatting**
 
 <!-- See the simple style guide. -->
-
-**Closing issues**
-
-Put `closes #XXXX` in your comment to auto-close the issue that your PR fixes (if such).
