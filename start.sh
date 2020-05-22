@@ -14,6 +14,11 @@ if [ $(which npm) ] ; then
 		npm i
 		echo "Libraries are up to date!"
 		echo
+		echo "Cleaning up . . ."
+		echo -n >./data/result.txt
+		echo -n "0" >./data/progress.txt
+		echo "Done!"
+		echo
 		read -rsn1 -p "Press any key to continue . . ."
 		clear
 		echo "You can close this window at any time to stop the process"
@@ -24,6 +29,7 @@ if [ $(which npm) ] ; then
 		while [ true ] ; do
 			if [[ -e ./finished ]] ; then
 				rm ./finished
+				echo -n >./data/queries.txt
 				read -rsn1 -p "Press any key to close this program . . ."
 				echo
 				exit

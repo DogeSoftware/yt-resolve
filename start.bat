@@ -12,6 +12,11 @@ call npm i
 title yt-resolve
 echo Libraries are up to date!
 echo.
+echo Cleaning up . . .
+echo | set /p= >./data/result.txt
+echo | set /p=0 >./data/progress.txt
+echo Done!
+echo.
 echo Press any key to continue . . .
 pause>nul
 cls
@@ -37,6 +42,7 @@ goto end
 
 :finished
 del finished
+echo | set /p= >./data/queries.txt
 goto end
 
 :end

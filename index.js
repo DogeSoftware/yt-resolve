@@ -6,9 +6,9 @@ const chalk = require('chalk'),
 	search = require('yt-search');
 
 // Load Configuration
-const outputFile = './result.txt',
-	progress = parseInt(fs.readFileSync('./progress.txt', 'utf8')),
-	queriesFile = './queries.txt',
+const outputFile = './data/result.txt',
+	progress = parseInt(fs.readFileSync('./data/progress.txt', 'utf8')),
+	queriesFile = './data/queries.txt',
 	resultfile = fs.createWriteStream(outputFile, { flags: 'a' });
 	
 // Define Functions
@@ -41,7 +41,7 @@ getLine(queriesFile, progress, (err, line) => {
 			const videos = res.videos;
 			console.log(chalk.green(`Found video: ${videos[0].title}`));
 			// saves the current line
-			fs.writeFileSync('./progress.txt', `${progress + 1}`, 'utf8');
+			fs.writeFileSync('./data/progress.txt', `${progress + 1}`, 'utf8');
 			// saves the output url
 			resultfile.write(`${videos[0].url}\n`);
 			resultfile.end();
