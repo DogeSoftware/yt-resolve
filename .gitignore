@@ -1,5 +1,5 @@
 
 node_modules
-./progress.txt
-./queries.txt
-./result.txt
+progress.txt
+queries.txt
+result.txt
