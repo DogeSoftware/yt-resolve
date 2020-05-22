@@ -8,7 +8,6 @@ if [ $(which npm) ] ; then
 	# Check if Node is installed
 	if [ $(which node) ] ; then
 		# Make sure libraries are up-to-date
-		node ./scripts/banner.js
 		echo "Updating Libraries . . ."
 		echo
 		npm i

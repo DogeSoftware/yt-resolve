@@ -5,7 +5,6 @@ where npm.cmd >nul 2>&1 && goto NPMInstalled || goto NPMNotInstalled
 :NPMInstalled
 where node.exe >nul 2>&1 && goto NodeInstalled || goto NodeNotInstalled
 :NodeInstalled
-call node ./scripts/banner.js
 echo Updating Libraries . . .
 echo.
 call npm i
@@ -31,6 +30,7 @@ goto loop
 :loop
 if exist finished goto finished
 call node ./index.js
+call powershell.exe Get-Content ./data/buffer.txt
 goto loop
 
 :NPMNotInstalled

@@ -12,7 +12,8 @@ chalk.level = 1;
 const outputFile = './data/result.txt',
 	progress = parseInt(fs.readFileSync('./data/progress.txt', 'utf8')),
 	queriesFile = './data/queries.txt',
-	resultfile = fs.createWriteStream(outputFile, { flags: 'a' });
+	resultfile = fs.createWriteStream(outputFile, { flags: 'a' }),
+	config = './config.yml';
 	
 // Define Functions
 function sleep(ms) {
@@ -30,6 +31,11 @@ function getLine(filename, lineNum, callback) {
 	});
 }
 
+function checkLength() {
+	let seconds = time - config.maxLength * 60;
+	if (selectedVideo.length > seconds) var selectedVideo = 1;
+}
+
 function finished() {
 	fs.appendFileSync("./data/buffer.txt", chalk.green(`\nTask finished, or no search queries in ${queriesFile}!\n`), "utf8");
 	fs.writeFileSync('./finished', "", "utf8");
@@ -42,11 +48,13 @@ getLine(queriesFile, progress, (err, line) => {
 	search(line, (err, res) => {
 		if (res) {
 			const videos = res.videos;
-			fs.appendFileSync("./data/buffer.txt", chalk.green(`\nFound video: ${videos[0].title}\n`), "utf8");
+			checkLength();
+			var selectedVideo = 0;
+			fs.appendFileSync("./data/buffer.txt", chalk.green(`\nFound video: ${videos[selectedVideo].title}\n`), "utf8");
 			// saves the current line
 			fs.writeFileSync('./data/progress.txt', `${progress + 1}`, 'utf8');
 			// saves the output url
-			resultfile.write(`${videos[0].url}\n`);
+			resultfile.write(`${videos[selectedVideo].url}\n`);
 			resultfile.end();
 		} else fs.appendFileSync("./data/buffer.txt", chalk.red('\nCould not find video! Ratelimit? Retrying . . .\n'), "utf8");
 	});
