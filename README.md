@@ -19,5 +19,5 @@ Let's assume you want to download some music. You found a playlist converter tha
 
 **NOTE: That was just a example. The "DogeSoftware" group respects the intellectual property rights of others, and requests you to do the same. DogeSoftware does not permit infringement of intellectual property rights through their software. This project is intended for educational purposes only!**
 
-### I'm confused about X.
+### Confused?
 Please see [the wiki](https://github.com/DogeSoftware/yt-resolve/wiki).
