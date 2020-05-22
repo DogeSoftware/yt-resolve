@@ -5,7 +5,7 @@ where npm.cmd >nul 2>&1 && goto NPMInstalled || goto NPMNotInstalled
 :NPMInstalled
 where node.exe >nul 2>&1 && goto NodeInstalled || goto NodeNotInstalled
 :NodeInstalled
-cls
+call node ./scripts/banner.js
 echo Updating Libraries . . .
 echo.
 call npm i
@@ -19,12 +19,12 @@ echo Done!
 echo.
 echo Press any key to continue . . .
 pause>nul
-cls
+call node ./scripts/banner.js
 echo You can close this window at any time to stop the process
 echo.
 echo Press any key to begin . . .
 pause>nul
-cls
+call node ./scripts/banner.js
 goto loop
 
 :loop

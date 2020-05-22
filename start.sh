@@ -8,7 +8,7 @@ if [ $(which npm) ] ; then
 	# Check if Node is installed
 	if [ $(which node) ] ; then
 		# Make sure libraries are up-to-date
-		clear
+		node ./scripts/banner.js
 		echo "Updating Libraries . . ."
 		echo
 		npm i
@@ -20,11 +20,11 @@ if [ $(which npm) ] ; then
 		echo "Done!"
 		echo
 		read -rsn1 -p "Press any key to continue . . ."
-		clear
+		node ./scripts/banner.js
 		echo "You can close this window at any time to stop the process"
 		echo
 		read -rsn1 -p "Press any key to begin . . ."
-		clear
+		node ./scripts/banner.js
 		# Begin infinite loop
 		while [ true ] ; do
 			if [[ -e ./finished ]] ; then

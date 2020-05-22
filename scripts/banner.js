@@ -7,5 +7,7 @@ console.log(chalk.cyan(
   " | | | | __|____| '__/ _ \\/ __|/ _ \\| \\ \\ / / _ \\\n" +
   " | |_| | ||_____| | |  __/\\__ \\ (_) | |\\ V /  __/\n" +
   "  \\__, |\\__|    |_|  \\___||___/\\___/|_| \\_/ \\___|\n" +
-  "  |___/     ") + chalk.underline("Made by Doge and cheesits456")
+  "  |___/     ") +
+	chalk.underline("Made by Doge and cheesits456") +
+	"\n\n\n"
 );
