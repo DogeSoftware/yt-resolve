@@ -31,6 +31,8 @@ goto loop
 :loop
 if exist finished goto finished
 call node ./index.js
+cls
+call node ./scripts/banner.js
 call powershell.exe Get-Content ./data/buffer.txt
 goto loop
 
