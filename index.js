@@ -1,8 +1,9 @@
 // Thanks Stackoverflow!
 
 // Require Modules
+// graceful-fs is way better than regular fs and is a drop-in replacement.
 const chalk = require('chalk'),
-	fs = require('fs'),
+	fs = require('graceful-fs'),
 	search = require('yt-search'),
 	height = process.argv[2] - 8;
 
