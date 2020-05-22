@@ -3,7 +3,10 @@
 // Require Modules
 const chalk = require('chalk'),
 	fs = require('fs'),
-	search = require('yt-search');
+	search = require('yt-search'),
+	height = process.argv[2] - 8;
+
+chalk.level = 1;
 
 // Load Configuration
 const outputFile = './data/result.txt',
@@ -28,25 +31,29 @@ function getLine(filename, lineNum, callback) {
 }
 
 function finished() {
-	console.log(chalk.green(`\nTask finished, or no search queries in ${queriesFile}!`));
+	fs.appendFileSync("./data/buffer.txt", chalk.green(`\nTask finished, or no search queries in ${queriesFile}!\n`), "utf8");
 	fs.writeFileSync('./finished', "", "utf8");
 }
 
 // Call Functions
 getLine(queriesFile, progress, (err, line) => {
 	if (!line) return finished();
-	console.log(chalk.yellow(`Searching: ${line}`));
+	fs.appendFileSync("./data/buffer.txt", chalk.yellow(`Searching: ${line}\n`), "utf8");
 	search(line, (err, res) => {
 		if (res) {
 			const videos = res.videos;
-			console.log(chalk.green(`Found video: ${videos[0].title}`));
+			fs.appendFileSync("./data/buffer.txt", chalk.green(`\nFound video: ${videos[0].title}\n`), "utf8");
 			// saves the current line
 			fs.writeFileSync('./data/progress.txt', `${progress + 1}`, 'utf8');
 			// saves the output url
 			resultfile.write(`${videos[0].url}\n`);
 			resultfile.end();
-		} else return console.log(chalk.red('Could not find video! Ratelimit? Retrying..'));
+		} else fs.appendFileSync("./data/buffer.txt", chalk.red('\nCould not find video! Ratelimit? Retrying . . .\n'), "utf8");
 	});
+	let lineArray = fs.readFileSync("./data/buffer.txt", "utf8").split("\n");
+	while (lineArray.length > height - 1) lineArray.shift();
+	lineArray.pop();
+	fs.writeFileSync("./data/buffer.txt", lineArray.join("\n"), "utf8");
 	// a simple fix to minimize ratelimits
 	sleep(250);
 });

@@ -16,6 +16,7 @@ if [ $(which npm) ] ; then
 		echo
 		echo "Cleaning up . . ."
 		echo -n >./data/result.txt
+		echo -n >./data/buffer.txt
 		echo -n "0" >./data/progress.txt
 		echo "Done!"
 		echo
@@ -34,7 +35,10 @@ if [ $(which npm) ] ; then
 				echo
 				exit
 			fi
-			node ./index.js
+			node ./index.js $(tput lines)
+			echo -en "/033[0;0H"
+			node ./scripts/banner.js
+			$(which cat) ./data/buffer.txt
 		done
 	else
 		# Exit with error if Node is not installed

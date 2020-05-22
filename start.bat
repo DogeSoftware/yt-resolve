@@ -14,6 +14,7 @@ echo Libraries are up to date!
 echo.
 echo Cleaning up . . .
 echo | set /p= >./data/result.txt
+echo | set /p= >./data/buffer.txt
 echo | set /p=0 >./data/progress.txt
 echo Done!
 echo.
