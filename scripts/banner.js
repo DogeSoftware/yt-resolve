@@ -9,5 +9,5 @@ console.log(chalk.cyan(
   "  \\__, |\\__|    |_|  \\___||___/\\___/|_| \\_/ \\___|\n" +
   "  |___/     ") +
 	chalk.underline("Made by Doge and cheesits456") +
-	"\n\n\n"
+	"\n\n"
 );
