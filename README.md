@@ -19,5 +19,8 @@ Let's assume you want to download some music. You found a playlist converter tha
 
 **NOTE: That was just a example. The "DogeSoftware" group respects the intellectual property rights of others, and requests you to do the same. DogeSoftware does not permit infringement of intellectual property rights through their software. This project is intended for educational purposes only!**
 
+### Web API
+The project was ported to a web API. It doesn't support batch/bulk searching yet, but you can search things with it without cloning this entire repository, downloading Node.js and doing other things. [https://yt-resolve.glitch.me/](https://yt-resolve.glitch.me/)
+
 ### Confused?
 Please see [the wiki](https://github.com/DogeSoftware/yt-resolve/wiki).
