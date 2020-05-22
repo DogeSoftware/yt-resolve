@@ -5,7 +5,7 @@ where npm.cmd >nul 2>&1 && goto NPMInstalled || goto NPMNotInstalled
 :NPMInstalled
 where node.exe >nul 2>&1 && goto NodeInstalled || goto NodeNotInstalled
 :NodeInstalled
-call node ./scripts/banner.js
+cls
 echo Updating Libraries . . .
 echo.
 call npm i
