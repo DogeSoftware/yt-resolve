@@ -2,10 +2,10 @@
 > Changes search queries into youtube links. Doesn't need an API key.
 
 ### How to Use
-- Add the search queries in `queries.txt`
+- Add the search queries in `queries.txt` (in the `data` folder).
 - If on Windows, run `start.bat`
 - If on Linux, run `start.sh`
-- Results will appear in `results.txt`.
+- Results will appear in `results.txt` (in the `data` folder).
 - Running `node cleanup.js` in the working directory will erase `queries.txt` and `results.txt`, and set `progress.txt` back to 0.
 
 ### Features
