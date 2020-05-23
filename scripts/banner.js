@@ -9,5 +9,5 @@ console.log(chalk.cyan(
   "  :__, |:__|    |_|  :___||___/:___/|_| :_/ :___|\n" +
   "  |___/          ").replace(/:/g, "\\") +
 	chalk.underline("Made by DogeSoftware Group 2020") +
-	"\n\n"
+	"\n\n",
 );
