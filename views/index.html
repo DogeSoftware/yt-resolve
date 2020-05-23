@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>yt-resolve api</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="A web api port of the CLI app yt-resolve."
+    />
+    <meta name="author" content="DogeSoftware" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        color: white;
+        background-color: black;
+      }
+      * {
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      code {
+        font-family: monospace;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>yt-resolve api</h1>
+    <h3>
+      What's this?
+    </h3>
+    <p>
+      This is a port of
+      <a href="https://github.com/DogeSoftware/yt-resolve">yt-resolve</a>. The
+      original project is a CLI app, and this is a web API.
+    </p>
+    <h3>
+      How do I use this?
+    </h3>
+    <p>
+      To get the json data for the first video in your search query, use
+      <code>https://yt-resolve.glitch.me/api/json/YOUR-SEARCH-QUERY</code>. You
+      get a lot of data from this API:
+    </p>
+    <img
+      src="https://cdn.glitch.com/37e385f7-9e3a-41c7-9995-69be9a899356%2F9643eb4f-a77a-4608-8bf3-c203b5eeb67a.obraz.png?v=1590160872946"
+    />
+    <p>
+      If your app doesn't support JSON for some reason, you can get the url of
+      the video you searched for in plaintext:
+      <code>https://yt-resolve.glitch.me/api/pt/YOUR-SEARCH-QUERY/url</code>.
+    </p>
+    <p>
+      Unfortunately, you can't get other info (name, duration, channel, views,
+      etc.) using the plain-text api.
+    </p>
+    <p>
+      There's also a <b>/full</b> endpoint that gives you what it says - all
+      search results, including channels, playlists and more:
+      <code>https://yt-resolve.glitch.me/api/json/YOUR-SEARCH-QUERY/full</code>.
+    </p>
+    <img
+      src="https://cdn.glitch.com/37e385f7-9e3a-41c7-9995-69be9a899356%2Fad4d75ae-acc3-4b59-b0f3-2c5b12458bdc.obraz.png?v=1590174855416"
+    />
+    <p>
+      If you want a specific part of the search results (videos, channels or
+      playlists), you can use
+      <code
+        >https://yt-resolve.glitch.me/api/json/YOUR-SEARCH-QUERY/full/videos|playlists|channels</code
+      >. For example, if you want all the playlists, use
+      <code
+        >https://yt-resolve.glitch.me/api/json/YOUR-SEARCH-QUERY/full/playlists</code
+      >.
+    </p>
+    <h3>
+      Warning!
+    </h3>
+    <p>
+      If you're building an app using this API, please send a request to it and
+      wait at least 15 seconds before you start making actual requests. Our
+      hosting provider is "shutting down" this API if there was no activity for
+      5 minutes, and it comes back up if someone makes a request. If you want to
+      host this app 24/7, please make an issue in the GitHub repository! 💜
+    </p>
+    <br /><br /><br /><br />
+    <h6>
+      Made by DogeSoftware
+    </h6>
+    <div class="glitchButton" style="position:fixed;top:2em;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js" defer></script>
+  </body>
+</html>

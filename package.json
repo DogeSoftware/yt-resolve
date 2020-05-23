@@ -1,17 +1,20 @@
 {
   "name": "yt-resolve",
-  "version": "1.0.0",
-  "description": "Changes search queries into youtube links.",
-  "main": "index.js",
+  "version": "0.0.1",
+  "description": "Web port of yt-resolve",
+  "main": "server.js",
   "scripts": {
-    "start": "echo Please run start.bat or start.sh depending on your operating system."
+    "start": "node server.js"
   },
-  "author": "DogeSoftware",
-  "license": "Unlicense",
   "dependencies": {
-    "chalk": "^4.0.0",
-    "eslint": "^7.1.0",
-    "graceful-fs": "^4.2.4",
+    "express": "^4.17.1",
     "yt-search": "^1.1.2"
-  }
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/yt-resolve"
+  },
+  "license": "Unlicense"
 }
