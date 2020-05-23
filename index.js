@@ -58,6 +58,6 @@ getLine(queriesFile, progress, (err, line) => {
 	while (lineArray.length > height - 1) lineArray.shift();
 	lineArray.pop();
 	fs.writeFileSync("./data/buffer.txt", lineArray.join("\n"), "utf8");
-	// a simple fix to minimize ratelimits
+	// A simple fix to minimize ratelimits.
 	sleep(250);
 });
