@@ -17,14 +17,9 @@ app.get("/api/json/:query", (request, response) => {
     if (res) {
       const videos = res.videos;
       console.log(`Sending first result to client`);
-      /*
-      Delivers the data to the user.
-      If there's an error, the server will
-      send error 500, which means
-      Internal Server Error.
-      https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
-      */
+      // Delivers the first result of the search results
       response.send(videos[0]);
+      // If there was no response, returns http code 500
     } else response.status(500);
   });
 });
@@ -39,32 +34,24 @@ app.get("/api/json/:query/full", (request, response) => {
   });
 });
 
-// Same as above, but for videos
-app.get("/api/json/:query/full/videos", (request, response) => {
-  search(request.params, (err, res) => {
+// Full JSON API, but with a filter
+app.get("/api/json/:query/full/:type", (request, response) => {
+  search(request.params.query, (err, res) => {
     if (res) {
-      console.log(`Sending full video results to client`);
-      response.send(res.videos);
-    } else response.status(500);
-  });
-});
-
-// Same as above, but for channels
-app.get("/api/json/:query/full/channels", (request, response) => {
-  search(request.params, (err, res) => {
-    if (res) {
-      console.log(`Sending full channel results to client`);
-      response.send(res.channels);
-    } else response.status(500);
-  });
-});
-
-// Same as above, but for playlists
-app.get("/api/json/:query/full/playlists", (request, response) => {
-  search(request.params, (err, res) => {
-    if (res) {
-      console.log(`Sending full channel results to client`);
-      response.send(res.playlists);
+      if (request.params.type === "channels") {
+        console.log(`Sending full channel results to client`);
+        response.send(res.channels);
+      } else if (request.params.type === "videos") {
+        console.log(`Sending full video results to client`);
+        response.send(res.videos);
+      } else if (request.params.type === "playlists") {
+        console.log(`Sending full playlist results to client`);
+        response.send(res.playlists);
+        // Returns 501 (Not Implemented) if the user tries
+        // to use a not-implemented type
+      } else response.status(501);
+      // If there was no response from YouTube, return
+      // 500 (Internal Server Error).
     } else response.status(500);
   });
 });
@@ -78,6 +65,11 @@ app.get("/api/pt/:query/url", (request, response) => {
       response.send(videos.url[0]);
     } else response.status(500);
   });
+});
+
+// Easter Egg
+app.get("/teapot", (request, response) => {
+  response.status(418).send("yea im a teapot. what is this? your browser received http code 418 (im a teapot).");
 });
 
 // Listen for requests.
