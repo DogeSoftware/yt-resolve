@@ -10,6 +10,7 @@
   "license": "Unlicense",
   "dependencies": {
     "chalk": "^4.0.0",
+    "eslint": "^7.1.0",
     "graceful-fs": "^4.2.4",
     "yt-search": "^1.1.2"
   }
