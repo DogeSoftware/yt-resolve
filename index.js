@@ -14,7 +14,7 @@ const outputFile = './data/result.txt',
 	progress = parseInt(fs.readFileSync('./data/progress.txt', 'utf8')),
 	queriesFile = './data/queries.txt',
 	resultfile = fs.createWriteStream(outputFile, { flags: 'a' });
-	
+
 // Define Functions
 function sleep(ms) {
 	return new Promise(res => setTimeout(res, ms));
@@ -49,9 +49,12 @@ getLine(queriesFile, progress, (err, line) => {
 			// saves the output url
 			resultfile.write(`${videos[0].url}\n`);
 			resultfile.end();
-		} else fs.appendFileSync("./data/buffer.txt", chalk.red('\nCould not find video! Ratelimit? Retrying . . .\n'), "utf8");
+		}
+		else {
+			fs.appendFileSync("./data/buffer.txt", chalk.red('\nCould not find video! Ratelimit? Retrying . . .\n'), "utf8");
+		}
 	});
-	let lineArray = fs.readFileSync("./data/buffer.txt", "utf8").split("\n");
+	const lineArray = fs.readFileSync("./data/buffer.txt", "utf8").split("\n");
 	while (lineArray.length > height - 1) lineArray.shift();
 	lineArray.pop();
 	fs.writeFileSync("./data/buffer.txt", lineArray.join("\n"), "utf8");
