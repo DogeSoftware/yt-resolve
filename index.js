@@ -3,22 +3,18 @@
 // Require built-in modules
 const util = require("util"),
 	exec = util.promisify(require("child_process").exec),
-	realFS = require("fs"); // the original fs is needed here to check if the other one is installed
+	// the original fs is needed here to check if the other one is installed
+	realFS = require("fs");
 
 
-// Wrap everything in an annonymous function so we can use `await`
+// Wrap everything in an anonymous function so we can use `await`
 (async () => {
 
 	// Check if node modules are installed, install them if not
 	if (!realFS.existsSync("./node_modules")) {
-		try {
-			console.log("Installing required libraries . . .");
-			await exec("npm i");
-		} catch (err) {
-			throw err;
-		}
+		console.log("Installing required libraries . . .");
+		await exec("npm i");
 	}
-
 
 	// Require third party modules
 	const chalk = require('chalk'),
@@ -38,21 +34,21 @@ const util = require("util"),
 	// Define Functions
 	function sleep(ms) {
 		return new Promise(res => setTimeout(res, ms));
-	};
+	}
 
 	function getLine(filename, lineNum) {
 		const lines = fs.readFileSync(filename, "utf8").split("\n");
 		return lines[lineNum];
 	}
 
+	const currentTime = new Date().toISOString().match(/(\d{2}:){2}\d{2}/)[0];
 
-	// Set Title
+	// Set the terminal window's title
 	setTitle("yt-resolve");
 
-
-	// Clean up "./data"
-	fs.writeFileSync("./data/results.txt", "", "utf8");
-
+	// Clean up the previous data
+	fs.writeFileSync("./data/queries.txt", "", "utf8");
+	fs.appendFileSync('./data/result.txt', `\n${currentTime}\n`, 'utf8');
 
 	// Execute code
 	drawBanner();
@@ -61,17 +57,20 @@ const util = require("util"),
 	drawBanner();
 	while (progress < queries.length) {
 		const query = getLine("./data/queries.txt", progress);
-				console.log(chalk.yellow(`Searching: ${query}`));
-		try {
-			const res = await search(query);
-			if (res && res.videos[0]) {
-				const videos = res.videos;
-				console.log(chalk.green(`Found video: ${videos[0].title}`));
-				fs.appendFileSync("./data/results.txt", `${videos[0].url}\n`);
-				progress++;
-			} else console.log(chalk.red('Could not find video! Ratelimit? Retrying . . .'));
-		} catch (err) { throw err }
+		console.log(chalk.yellow(`Searching: ${query}`));
+		const res = await search(query);
+		if (res && res.videos[0]) {
+			const videos = res.videos;
+			console.log(chalk.green(`Found video: ${videos[0].title}`));
+			fs.appendFileSync("./data/results.txt", `${videos[0].url}\n`);
+			progress++;
+			sleep(250);
+		}
+		else {
+			console.log(chalk.red('Could not find video! Ratelimit? Retrying . . .'));
+			throw 'Error while searching the video';
+		}
 	}
-	console.log(chalk.green(`\nTask finished, or no search queries in "./data/queries.txt"`));
+	console.log(chalk.green('\nTask finished, or no search queries in "./data/queries.txt"'));
 	pause("Press any key to close this program . . .");
-})()
+})();
