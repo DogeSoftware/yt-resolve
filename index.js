@@ -40,6 +40,11 @@ const util = require("util"),
 		return new Promise(res => setTimeout(res, ms));
 	};
 
+	function getLine(filename, lineNum) {
+		const lines = fs.readFileSync(filename, "utf8").split("\n");
+		return lines[lineNum];
+	}
+
 
 	// Set Title
 	setTitle("yt-resolve");
@@ -54,14 +59,16 @@ const util = require("util"),
 	console.log("You can close this window at any time to stop the process\n");
 	await pause("Press any key to begin . . .");
 	drawBanner();
-	for (query of queries) {
-		console.log(chalk.yellow(`Searching: ${query}`));
+	while (progress < queries.length) {
+		const query = getLine("./data/queries.txt", progress);
+				console.log(chalk.yellow(`Searching: ${query}`));
 		try {
 			const res = await search(query);
-			if (res && res.videos[0].title) {
+			if (res && res.videos[0]) {
 				const videos = res.videos;
 				console.log(chalk.green(`Found video: ${videos[0].title}`));
 				fs.appendFileSync("./data/results.txt", `${videos[0].url}\n`);
+				progress++;
 			} else console.log(chalk.red('Could not find video! Ratelimit? Retrying . . .'));
 		} catch (err) { throw err }
 	}
