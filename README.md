@@ -3,7 +3,8 @@
 
 ### How to Use
 - Add the search queries in `queries.txt` (in the `data` folder).
-- Open a terminal in the main directory and run `node index.js`
+- Open a terminal in the main directory (where `index.js` is located) and run `node setup.js`. You only need to run the setup script once.
+- Run `node index.js`.
 - Results will appear in `results.txt` (in the `data` folder).
 
 ### Features
