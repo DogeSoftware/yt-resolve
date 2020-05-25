@@ -8,6 +8,6 @@ module.exports = () => {
 		"  | |_| | ||_____| | |  __/:__ : (_) | |: V /  __/  \n" +
 		"   :__, |:__|    |_|  :___||___/:___/|_| :_/ :___|  \n" +
 		"   |___/          ").replace(/:/g, "\\") +
-		`${chalk.underline("Made by DogeSoftware Group 2020")}\n\n`
-	)
-}
+		`${chalk.underline("Made by DogeSoftware Group 2020")}\n\n`,
+	);
+};
