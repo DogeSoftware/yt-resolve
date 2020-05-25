@@ -11,6 +11,8 @@
   "dependencies": {
     "chalk": "^4.0.0",
     "graceful-fs": "^4.2.4",
+    "node-bash-title": "0.0.2",
+    "press-any-key": "^0.1.1",
     "yt-search": "^1.1.2"
   }
 }

@@ -1,60 +1,87 @@
 // Thanks Stackoverflow!
 
-// Require Modules
-// graceful-fs is way better than regular fs and is a drop-in replacement.
-const chalk = require('chalk'),
-	fs = require('graceful-fs'),
-	search = require('yt-search'),
-	height = process.argv[2] - 8;
+// Require built-in modules
+const util = require("util"),
+	exec = util.promisify(require("child_process").exec),
+	realFS = require("fs"); // the original fs is needed here to check if the other one is installed
 
-chalk.level = 1;
 
-// Load Configuration
-const outputFile = './data/result.txt',
-	progress = parseInt(fs.readFileSync('./data/progress.txt', 'utf8')),
-	queriesFile = './data/queries.txt',
-	resultfile = fs.createWriteStream(outputFile, { flags: 'a' });
-	
-// Define Functions
-function sleep(ms) {
-	return new Promise(res => setTimeout(res, ms));
-}
+// Wrap everything in an annonymous function so we can use `await`
+(async () => {
 
-function getLine(filename, lineNum, callback) {
-	fs.readFile(filename, (err, data) => {
-		if (err) throw err;
-		// Data is a buffer that we need to convert to a string
-		// Improvement: loop over the buffer and stop when the line is reached
-		const lines = data.toString('utf-8').split('\n');
-		if (+lineNum > lines.length) return callback('File end reached without finding line', null);
-		callback(null, lines[+lineNum]);
-	});
-}
+	// Check if node modules are installed, install them if not
+	if (!realFS.existsSync("./node_modules")) {
+		try {
+			console.log("Installing required libraries . . .");
+			await exec("npm i");
+		} catch (err) {
+			throw err;
+		}
+	}
 
-function finished() {
-	fs.appendFileSync("./data/buffer.txt", chalk.green(`\nTask finished, or no search queries in ${queriesFile}!\n`), "utf8");
-	fs.writeFileSync('./finished', "", "utf8");
-}
 
-// Call Functions
-getLine(queriesFile, progress, (err, line) => {
-	if (!line) return finished();
-	fs.appendFileSync("./data/buffer.txt", chalk.yellow(`Searching: ${line}\n`), "utf8");
-	search(line, (err, res) => {
-		if (res) {
-			const videos = res.videos;
-			fs.appendFileSync("./data/buffer.txt", chalk.green(`\nFound video: ${videos[0].title}\n`), "utf8");
-			// saves the current line
-			fs.writeFileSync('./data/progress.txt', `${progress + 1}`, 'utf8');
-			// saves the output url
-			resultfile.write(`${videos[0].url}\n`);
-			resultfile.end();
-		} else fs.appendFileSync("./data/buffer.txt", chalk.red('\nCould not find video! Ratelimit? Retrying . . .\n'), "utf8");
-	});
-	let lineArray = fs.readFileSync("./data/buffer.txt", "utf8").split("\n");
-	while (lineArray.length > height - 1) lineArray.shift();
-	lineArray.pop();
-	fs.writeFileSync("./data/buffer.txt", lineArray.join("\n"), "utf8");
-	// a simple fix to minimize ratelimits
-	sleep(250);
-});
+	// Require third party modules
+	const chalk = require('chalk'),
+		drawBanner = require("./scripts/banner.js"),
+		fs = require('graceful-fs'),
+		pause = require("press-any-key"),
+		setTitle = require("node-bash-title"),
+		search = require('yt-search');
+
+
+	// Load Configuration
+	chalk.level = 1;
+	const queries = fs.readFileSync('./data/queries.txt', "utf8").split("\n");
+	let progress = 0;
+
+
+	// Define Functions
+	function sleep(ms) {
+		return new Promise(res => setTimeout(res, ms));
+	};
+
+	function getLine(filename, lineNum, callback) {
+		fs.readFile(filename, (err, data) => {
+			if (err) throw err;
+			// Data is a buffer that we need to convert to a string
+			// Improvement: loop over the buffer and stop when the line is reached
+			const lines = data.toString('utf-8').split('\n');
+			if (+lineNum > lines.length) return callback('File end reached without finding line', null);
+			callback(null, lines[+lineNum]);
+		});
+	}
+
+	function finished() {
+		fs.appendFileSync("./data/buffer.txt", chalk.green(`\nTask finished, or no search queries in ${queriesFile}!\n`), "utf8");
+		fs.writeFileSync('./finished', "", "utf8");
+	}
+
+
+	// Set Title
+	setTitle("yt-resolve");
+
+
+	// Clean up "./data"
+	fs.writeFileSync("./data/progress.txt", "0", "utf8");
+	fs.writeFileSync("./data/results.txt", "", "utf8");
+
+
+	// Execute code
+	drawBanner();
+	console.log("You can close this window at any time to stop the process\n");
+	await pause("Press any key to begin . . .");
+	drawBanner();
+	for (query of queries) {
+		console.log(chalk.yellow(`Searching: ${query}`));
+		try {
+			const res = await search(query);
+			if (res) {
+				const videos = res.videos;
+				console.log(chalk.green(`Found video: ${videos[0].title}`));
+				fs.appendFileSync("./data/results.txt", `${videos[0].url}`);
+			} else console.log(chalk.red('Could not find video! Ratelimit? Retrying . . .'));
+		} catch (err) { throw err }
+	}
+	console.log(chalk.green(`\nTask finished, or no search queries in "./data/queries.txt"`));
+	pause("Press any key to close this program . . .");
+})()
