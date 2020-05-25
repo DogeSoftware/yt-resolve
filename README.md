@@ -3,10 +3,8 @@
 
 ### How to Use
 - Add the search queries in `queries.txt` (in the `data` folder).
-- If on Windows, run `start.bat`
-- If on Linux, run `start.sh`
+- Open a terminal in the main directory and run `node index.js`
 - Results will appear in `results.txt` (in the `data` folder).
-- Running `node cleanup.js` in the working directory will erase `queries.txt` and `results.txt`, and set `progress.txt` back to 0.
 
 ### Features
 - High performance: tested with a query list of 4000 videos
