@@ -58,7 +58,7 @@ const util = require("util"),
 		console.log(chalk.yellow(`Searching: ${query}`));
 		try {
 			const res = await search(query);
-			if (res) {
+			if (res && res.videos[0].title) {
 				const videos = res.videos;
 				console.log(chalk.green(`Found video: ${videos[0].title}`));
 				fs.appendFileSync("./data/results.txt", `${videos[0].url}\n`);
