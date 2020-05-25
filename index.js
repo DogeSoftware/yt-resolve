@@ -62,7 +62,6 @@ const util = require("util"),
 
 
 	// Clean up "./data"
-	fs.writeFileSync("./data/progress.txt", "0", "utf8");
 	fs.writeFileSync("./data/results.txt", "", "utf8");
 
 
@@ -78,7 +77,7 @@ const util = require("util"),
 			if (res) {
 				const videos = res.videos;
 				console.log(chalk.green(`Found video: ${videos[0].title}`));
-				fs.appendFileSync("./data/results.txt", `${videos[0].url}`);
+				fs.appendFileSync("./data/results.txt", `${videos[0].url}\n`);
 			} else console.log(chalk.red('Could not find video! Ratelimit? Retrying . . .'));
 		} catch (err) { throw err }
 	}
