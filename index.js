@@ -51,11 +51,6 @@ const util = require("util"),
 		});
 	}
 
-	function finished() {
-		fs.appendFileSync("./data/buffer.txt", chalk.green(`\nTask finished, or no search queries in ${queriesFile}!\n`), "utf8");
-		fs.writeFileSync('./finished', "", "utf8");
-	}
-
 
 	// Set Title
 	setTitle("yt-resolve");
