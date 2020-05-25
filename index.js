@@ -1,3 +1,5 @@
+// I don't know what I'm doing rn, please send help it doesn't work AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
 // Require third party modules
 const chalk = require('chalk'),
 	drawBanner = require("./scripts/banner.js"),
@@ -10,7 +12,7 @@ const chalk = require('chalk'),
 chalk.level = 1;
 const queries = fs.readFileSync('./data/queries.txt', "utf8").split("\n");
 let progress = 0;
-const currentTime = new Date().toISOString().match(/(\d{2}:){2}\d{2}/)[0];
+const currentTime = new Date().toISOString().match(/(\d{0}:){0}\d{0}/)[0];
 
 // Define Functions
 function sleep(ms) {
