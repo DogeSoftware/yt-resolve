@@ -34,7 +34,7 @@ setTitle("yt-resolve");
 
 // Clean up the previous data
 fs.writeFileSync("./data/queries.txt", "", "utf8");
-fs.appendFileSync('./data/result.txt', `\n${currentTime}\n`, 'utf8');
+fs.appendFileSync('./data/results.txt', `\n${currentTime}\n`, 'utf8');
 
 // Execute code
 startup();
@@ -51,7 +51,6 @@ while (progress < queries.length) {
 	}
 	else {
 		console.log(chalk.red('Could not find video! Ratelimit? Retrying . . .'));
-		throw 'Error while searching the video';
 	}
 }
 console.log(chalk.green('\nTask finished, or no search queries in "./data/queries.txt"'));
