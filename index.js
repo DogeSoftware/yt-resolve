@@ -24,10 +24,10 @@ function getLine(filename, lineNum) {
 	return lines[lineNum];
 }
 
-function startup() {
+async function startup() {
 	drawBanner();
 	console.log("You can close this window at any time to stop the process\n");
-	pause("Press any key to begin . . .");
+	await pause("Press any key to begin . . .");
 	drawBanner();
 }
 
@@ -35,25 +35,25 @@ function startup() {
 setTitle("yt-resolve");
 
 // Clean up the previous data
-fs.writeFileSync("./data/queries.txt", "", "utf8");
 fs.appendFileSync('./data/results.txt', `\n${currentTime}\n`, 'utf8');
 
 // Execute code
-startup();
-while (progress < queries.length) {
-	const query = getLine("./data/queries.txt", progress);
-	console.log(chalk.yellow(`Searching: ${query}`));
-	const res = search(query);
-	if (res && res.videos[0]) {
-		const videos = res.videos;
-		console.log(chalk.green(`Found video: ${videos[0].title}`));
-		fs.appendFileSync("./data/results.txt", `${videos[0].url}\n`);
-		progress++;
-		sleep(250);
+(async () => {
+	await startup();
+	while (progress < queries.length) {
+		const query = getLine("./data/queries.txt", progress);
+		console.log(chalk.yellow(`Searching: ${query}`));
+		const res = await search(query);
+		if (res && res.videos[0]) {
+			const videos = res.videos;
+			console.log(chalk.green(`Found video: ${videos[0].title}`));
+			fs.appendFileSync("./data/results.txt", `${videos[0].url}\n`);
+			progress++;
+		} else {
+			console.log(chalk.red('Could not find video! Ratelimit? Retrying . . .'));
+		}
+		await sleep(250);
 	}
-	else {
-		console.log(chalk.red('Could not find video! Ratelimit? Retrying . . .'));
-	}
-}
-console.log(chalk.green('\nTask finished, or no search queries in "./data/queries.txt"'));
-pause("Press any key to close this program . . .");
+	console.log(chalk.green('\nTask finished, or no search queries in "./data/queries.txt"'));
+	await pause("Press any key to close this program . . .");
+})()
